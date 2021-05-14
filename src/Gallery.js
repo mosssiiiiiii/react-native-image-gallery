@@ -10,16 +10,16 @@ function Gallery({images}){
     }
 
     return(
-        <>
-            <View style={style.mainWrap}>
-                <Image style={style.main} source={{uri: main}}/>
+        <View>
+            <View style={style.imageWrap}>
+                <Image style={style.image} source={{uri: main}}/>
             </View>
 
             <View style={{flexDirection: 'row',justifyContent:'center'}}>
                 {
                     [...images].splice(0,3).map((item,index) =>
-                        <TouchableOpacity onPress={() => changeHandler(item)} style={style.thumbnail}>
-                            <Image style={img.image} source={{uri: item}} />
+                        <TouchableOpacity key={index} onPress={() => changeHandler(item)} style={style.thumbnail}>
+                            <Image style={style.image} source={{uri: item}} />
                         </TouchableOpacity>
                     )
                 }
@@ -30,12 +30,12 @@ function Gallery({images}){
                 </View>
             </View>
 
-        </>
+        </View>
     )
 }
 
 const style =  StyleSheet.create({
-    mainWrap: {
+    imageWrap: {
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'center',
@@ -46,7 +46,7 @@ const style =  StyleSheet.create({
         marginTop: 15,
         marginBottom: 15
     },
-    main: {
+    image: {
         height: '100%',
         width: '100%',
         alignItems: 'center',

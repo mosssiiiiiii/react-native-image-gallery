@@ -1,6 +1,6 @@
 {
-  "name": "react-native-modern-image-gallery",
-  "version": "1.0.4",
+  "name": "react-native-modern-test-gallery",
+  "version": "1.0.3",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,7 @@
   },
   "author": "mohsen haghighatkhah",
   "license": "ISC",
-  "peerDependencies": {
+  "perDependencies": {
     "react": "^17.0.2",
     "react-native": "^0.64.1"
   },
