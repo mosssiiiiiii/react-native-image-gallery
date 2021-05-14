@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
-import {View,ScrollView, Image, TouchableOpacity, StyleSheet} from 'react-native';
+import {View,Dimensions,ScrollView, Image, TouchableOpacity, StyleSheet} from 'react-native';
+const WIDTH = Dimensions.get('window').width;
 
 
-function Gallery({images, quantity, more,navigation}) {
+function Gallery({images, quantity, more,navigation,height}) {
     const [main, setMain] = useState(images[0])
 
     const changeHandler = (item) => {
@@ -38,7 +39,7 @@ function Gallery({images, quantity, more,navigation}) {
 
     return (
         <>
-            <View style={style.mainWrap}>
+            <View style={[style.mainWrap,WIDTH,{height: height}]}>
                 <Image style={style.image} source={{uri: main}}/>
             </View>
             {thumbnail}
