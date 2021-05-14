@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {View,ScrollView, Image, TouchableOpacity, StyleSheet} from 'react-native';
 
 
-function Gallery({images, quantity, more}) {
+function Gallery({images, quantity, more,navigation}) {
     const [main, setMain] = useState(images[0])
 
     const changeHandler = (item) => {
@@ -23,11 +23,11 @@ function Gallery({images, quantity, more}) {
         thumbnail =
             <View style={{padding: 15, flexDirection: 'row', justifyContent: 'center'}}>
                 {renderThumbnail()}
-                <View style={style.more}>
+                <TouchableOpacity onPress={navigation} style={style.more}>
                     <View style={style.dot}/>
                     <View style={style.dot}/>
                     <View style={style.dot}/>
-                </View>
+                </TouchableOpacity>
             </View>
     } else {
         thumbnail =
