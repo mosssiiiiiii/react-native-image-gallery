@@ -39,7 +39,7 @@ function Gallery({images, quantity, more,navigation,height}) {
 
     return (
         <>
-            <View style={[style.mainWrap,WIDTH,{height: height}]}>
+            <View style={[style.mainWrap,WIDTH,{height}]}>
                 <Image style={style.image} source={{uri: main}}/>
             </View>
             {thumbnail}
