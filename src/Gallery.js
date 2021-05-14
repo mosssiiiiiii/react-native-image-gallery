@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 import {View,Image,TouchableOpacity,StyleSheet} from 'react-native';
 
 
-function Gallery({images}){
+function Gallery({images,quantity}){
     const [main,setMain] = useState(images[0])
 
     const changeHandler = (item) =>{
@@ -17,9 +17,9 @@ function Gallery({images}){
 
             <View style={{flexDirection: 'row',justifyContent:'center'}}>
                 {
-                    [...images].splice(0,3).map((item,index) =>
+                    [...images].splice(0,quantity).map((item,index) =>
                         <TouchableOpacity onPress={() => changeHandler(item)} style={style.thumbnail}>
-                            <Image style={img.image} source={{uri: item}} />
+                            <Image style={style.image} source={{uri: item}} />
                         </TouchableOpacity>
                     )
                 }
