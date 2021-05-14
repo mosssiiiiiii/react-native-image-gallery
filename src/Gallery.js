@@ -59,7 +59,7 @@ const style = StyleSheet.create({
         marginTop: 15,
         marginBottom: 15
     },
-    main: {
+    image: {
         height: '100%',
         width: '100%',
         alignItems: 'center',
