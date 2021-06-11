@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
-import {View,Dimensions,ScrollView, Image, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, Dimensions, ScrollView, Image, TouchableOpacity, StyleSheet} from 'react-native';
+import PropTypes from 'prop-types';
 const WIDTH = Dimensions.get('window').width;
 
 
-function Gallery({images, quantity, more,navigation,height}) {
+function Gallery(props) {
+    const {images, quantity, more, navigation, height,width} = props;
     const [main, setMain] = useState(images[0])
 
     const changeHandler = (item) => {
@@ -12,7 +14,7 @@ function Gallery({images, quantity, more,navigation,height}) {
 
     const renderThumbnail = () => {
         return [...images].splice(0, quantity).map((item, index) =>
-            <TouchableOpacity onPress={() => changeHandler(item)} style={style.thumbnail}>
+            <TouchableOpacity key={index} onPress={() => changeHandler(item)} style={style.thumbnail}>
                 <Image style={style.image} source={{uri: item}}/>
             </TouchableOpacity>
         )
@@ -39,7 +41,7 @@ function Gallery({images, quantity, more,navigation,height}) {
 
     return (
         <>
-            <View style={[style.mainWrap,WIDTH,{height}]}>
+            <View style={[style.mainWrap, {width,height}]}>
                 <Image style={style.image} source={{uri: main}}/>
             </View>
             {thumbnail}
@@ -52,8 +54,6 @@ const style = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'center',
-        height: 250,
-        width: 250,
         paddingLeft: 15,
         paddingRight: 15,
         marginTop: 15,
@@ -96,4 +96,17 @@ const style = StyleSheet.create({
     }
 });
 
+Gallery.propTypes = {
+    images: PropTypes.array,
+    quantity: PropTypes.number,
+    more: PropTypes.bool,
+    navigation: PropTypes.object,
+    height: PropTypes.number,
+    width: PropTypes.number,
+}
+
+Gallery.defaultProps = {
+    more: false,
+    width: WIDTH
+}
 export default Gallery;

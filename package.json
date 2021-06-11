@@ -1,5 +1,5 @@
 {
-  "name": "react-native-modern-test-gallery",
+  "name": "react-native-modern-gallery",
   "version": "1.0.3",
   "description": "",
   "main": "index.js",
@@ -25,5 +25,8 @@
     "@babel/preset-es2015": "^7.0.0-beta.53",
     "@babel/preset-react": "^7.13.13",
     "babel-preset-minify": "^0.5.1"
+  },
+  "dependencies": {
+    "prop-types": "^15.7.2"
   }
 }
