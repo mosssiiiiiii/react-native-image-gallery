@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
-import {View,Dimensions,ScrollView, Image, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, Dimensions, ScrollView, Image, TouchableOpacity, StyleSheet} from 'react-native';
+import PropTypes from 'prop-types';
 const WIDTH = Dimensions.get('window').width;
 
 
-function Gallery({images, quantity, more,navigation,height}) {
+function Gallery(props) {
+    const {images, quantity, more, navigation, height} = props;
     const [main, setMain] = useState(images[0])
 
     const changeHandler = (item) => {
@@ -39,7 +41,7 @@ function Gallery({images, quantity, more,navigation,height}) {
 
     return (
         <>
-            <View style={[style.mainWrap,WIDTH,{height}]}>
+            <View style={[style.mainWrap, WIDTH, {height}]}>
                 <Image style={style.image} source={{uri: main}}/>
             </View>
             {thumbnail}
@@ -96,4 +98,15 @@ const style = StyleSheet.create({
     }
 });
 
+Gallery.propTypes = {
+    images: PropTypes.array,
+    quantity: PropTypes.number,
+    more: PropTypes.bool,
+    navigation: PropTypes.object,
+    height: PropTypes.number,
+}
+
+Gallery.defaultProps = {
+    more: false
+}
 export default Gallery;
