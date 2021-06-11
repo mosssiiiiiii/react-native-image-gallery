@@ -29,7 +29,8 @@ function Gallery(props) {
       more = props.more,
       navigation = props.navigation,
       height = props.height,
-      width = props.width;
+      width = props.width,
+      activeColor = props.activeColor;
 
   var _useState = useState(images[0]),
       _useState2 = _slicedToArray(_useState, 2),
@@ -47,7 +48,9 @@ function Gallery(props) {
         onPress: function onPress() {
           return changeHandler(item);
         },
-        style: style.thumbnail
+        style: [style.thumbnail, item === main && {
+          borderColor: activeColor
+        }]
       }, React.createElement(Image, {
         style: style.image,
         source: {
@@ -151,10 +154,12 @@ Gallery.propTypes = {
   more: PropTypes.bool,
   navigation: PropTypes.object,
   height: PropTypes.number,
-  width: PropTypes.number
+  width: PropTypes.number,
+  activeColor: PropTypes.string
 };
 Gallery.defaultProps = {
   more: false,
+  activeColor: 'blue',
   width: WIDTH
 };
 export default Gallery;

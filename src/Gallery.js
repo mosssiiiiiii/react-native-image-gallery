@@ -5,7 +5,7 @@ const WIDTH = Dimensions.get('window').width;
 
 
 function Gallery(props) {
-    const {images, quantity, more, navigation, height,width} = props;
+    const {images, quantity, more, navigation, height,width,activeColor} = props;
     const [main, setMain] = useState(images[0])
 
     const changeHandler = (item) => {
@@ -14,7 +14,7 @@ function Gallery(props) {
 
     const renderThumbnail = () => {
         return [...images].splice(0, quantity).map((item, index) =>
-            <TouchableOpacity key={index} onPress={() => changeHandler(item)} style={style.thumbnail}>
+            <TouchableOpacity key={index} onPress={() => changeHandler(item)} style={[style.thumbnail,item===main && {borderColor: activeColor}]}>
                 <Image style={style.image} source={{uri: item}}/>
             </TouchableOpacity>
         )
@@ -103,10 +103,12 @@ Gallery.propTypes = {
     navigation: PropTypes.object,
     height: PropTypes.number,
     width: PropTypes.number,
+    activeColor: PropTypes.string,
 }
 
 Gallery.defaultProps = {
     more: false,
+    activeColor: 'blue',
     width: WIDTH
 }
 export default Gallery;
