@@ -19,10 +19,17 @@ function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "und
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 import React, { useState } from 'react';
-import { View, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Dimensions, ScrollView, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
+var WIDTH = Dimensions.get('window').width;
 
-function Gallery(_ref) {
-  var images = _ref.images;
+function Gallery(props) {
+  var images = props.images,
+      quantity = props.quantity,
+      more = props.more,
+      navigation = props.navigation,
+      height = props.height,
+      width = props.width;
 
   var _useState = useState(images[0]),
       _useState2 = _slicedToArray(_useState, 2),
@@ -33,49 +40,70 @@ function Gallery(_ref) {
     setMain(item);
   };
 
-  return React.createElement(View, null, React.createElement(View, {
-    style: style.imageWrap
+  var renderThumbnail = function renderThumbnail() {
+    return _toConsumableArray(images).splice(0, quantity).map(function (item, index) {
+      return React.createElement(TouchableOpacity, {
+        key: index,
+        onPress: function onPress() {
+          return changeHandler(item);
+        },
+        style: style.thumbnail
+      }, React.createElement(Image, {
+        style: style.image,
+        source: {
+          uri: item
+        }
+      }));
+    });
+  };
+
+  var thumbnail;
+
+  if (more) {
+    thumbnail = React.createElement(View, {
+      style: {
+        padding: 15,
+        flexDirection: 'row',
+        justifyContent: 'center'
+      }
+    }, renderThumbnail(), React.createElement(TouchableOpacity, {
+      onPress: navigation,
+      style: style.more
+    }, React.createElement(View, {
+      style: style.dot
+    }), React.createElement(View, {
+      style: style.dot
+    }), React.createElement(View, {
+      style: style.dot
+    })));
+  } else {
+    thumbnail = React.createElement(ScrollView, {
+      contentContainerStyle: {
+        padding: 15
+      },
+      showsHorizontalScrollIndicator: false,
+      horizontal: true
+    }, renderThumbnail());
+  }
+
+  return React.createElement(React.Fragment, null, React.createElement(View, {
+    style: [style.mainWrap, {
+      width: width,
+      height: height
+    }]
   }, React.createElement(Image, {
     style: style.image,
     source: {
       uri: main
     }
-  })), React.createElement(View, {
-    style: {
-      flexDirection: 'row',
-      justifyContent: 'center'
-    }
-  }, _toConsumableArray(images).splice(0, 3).map(function (item, index) {
-    return React.createElement(TouchableOpacity, {
-      key: index,
-      onPress: function onPress() {
-        return changeHandler(item);
-      },
-      style: style.thumbnail
-    }, React.createElement(Image, {
-      style: style.image,
-      source: {
-        uri: item
-      }
-    }));
-  }), React.createElement(View, {
-    style: style.more
-  }, React.createElement(View, {
-    style: style.dot
-  }), React.createElement(View, {
-    style: style.dot
-  }), React.createElement(View, {
-    style: style.dot
-  }))));
+  })), thumbnail);
 }
 
 var style = StyleSheet.create({
-  imageWrap: {
+  mainWrap: {
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
-    height: 250,
-    width: 250,
     paddingLeft: 15,
     paddingRight: 15,
     marginTop: 15,
@@ -117,4 +145,16 @@ var style = StyleSheet.create({
     alignItems: 'center'
   }
 });
+Gallery.propTypes = {
+  images: PropTypes.array,
+  quantity: PropTypes.number,
+  more: PropTypes.bool,
+  navigation: PropTypes.object,
+  height: PropTypes.number,
+  width: PropTypes.number
+};
+Gallery.defaultProps = {
+  more: false,
+  width: WIDTH
+};
 export default Gallery;
