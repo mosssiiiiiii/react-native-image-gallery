@@ -18,7 +18,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "und
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Dimensions, ScrollView, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 var WIDTH = Dimensions.get('window').width;
@@ -36,6 +36,8 @@ function Gallery(props) {
       _useState2 = _slicedToArray(_useState, 2),
       main = _useState2[0],
       setMain = _useState2[1];
+
+  useEffect(function () {}, [main]);
 
   var changeHandler = function changeHandler(item) {
     setMain(item);

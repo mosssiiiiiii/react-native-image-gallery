@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import {View, Dimensions, ScrollView, Image, TouchableOpacity, StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 const WIDTH = Dimensions.get('window').width;
@@ -7,6 +7,10 @@ const WIDTH = Dimensions.get('window').width;
 function Gallery(props) {
     const {images, quantity, more, navigation, height,width,activeColor} = props;
     const [main, setMain] = useState(images[0])
+
+    useEffect(() =>{
+
+    },[main])
 
     const changeHandler = (item) => {
         setMain(item)
