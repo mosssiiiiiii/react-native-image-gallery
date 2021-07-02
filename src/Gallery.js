@@ -8,16 +8,13 @@ function Gallery(props) {
     const {images, quantity, more, navigation, height,width,activeColor} = props;
     const [main, setMain] = useState(images[0])
 
-    useEffect(() =>{
-
-    },[main])
 
     const changeHandler = (item) => {
         setMain(item)
     }
 
     const renderThumbnail = () => {
-        return [...images].splice(0, quantity).map((item, index) =>
+        return [...images].slice(0, quantity).map((item, index) =>
             <TouchableOpacity key={index} onPress={() => changeHandler(item)} style={[style.thumbnail,item===main && {borderColor: activeColor}]}>
                 <Image style={style.image} source={{uri: item}}/>
             </TouchableOpacity>
